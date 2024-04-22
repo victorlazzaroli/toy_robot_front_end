@@ -1,0 +1,120 @@
+#board {
+    width: clamp(250px, 80vw, 60vh);
+    aspect-ratio: 1/1;
+    background: white;
+    position: relative;
+}
+
+#board span {
+    display: block;
+    position: absolute;
+    border: 1px solid red;
+    width: 20%;
+    min-height: 4px;
+}
+
+#board .northWall {
+    top: -5px;
+}
+
+#board .sudWall {
+    bottom: -5px;
+    border-color: orange;
+}
+
+#board .ovestWall {
+    left: -5px;
+    transform-origin: bottom left;
+    transform: rotate(90deg);
+    border-color: blue;
+}
+
+#board .eastWall {
+    right: -5px;
+    transform-origin: bottom right;
+    transform: rotate(-90deg);
+    border-color: green;
+}
+
+/*------- North Wall ---- */
+#board .northWall:nth-of-type(1) {
+    left: 0;
+}
+#board .northWall:nth-of-type(2) {
+    left: 20%;
+}
+
+#board .northWall:nth-of-type(3) {
+    left: 40%;
+}
+
+#board .northWall:nth-of-type(4) {
+    left: 60%;
+}
+
+#board .northWall:nth-of-type(5) {
+    left: 80%;
+}
+
+/*------- Ovest Wall ---- */
+
+#board .ovestWall:nth-of-type(6) {
+    top: -5px;
+}
+#board .ovestWall:nth-of-type(7) {
+    top: calc(20% - 5px);
+}
+
+#board .ovestWall:nth-of-type(8) {
+    top: calc(40% - 5px);
+}
+
+#board .ovestWall:nth-of-type(9) {
+    top: calc(60% - 5px);
+}
+
+#board .ovestWall:nth-of-type(10) {
+    top: calc(80% - 5px);
+}
+
+/*------- East Wall ---- */
+
+#board .eastWall:nth-of-type(11) {
+    top: calc(0 - 5px);
+}
+#board .eastWall:nth-of-type(12) {
+    top: calc(20% - 5px);
+}
+
+#board .eastWall:nth-of-type(13) {
+    top: calc(40% - 5px);
+}
+
+#board .eastWall:nth-of-type(14) {
+    top: calc(60% - 5px);
+}
+
+#board .eastWall:nth-of-type(15) {
+    top: calc(80% - 5px);
+}
+
+/*------- Sud Wall ---- */
+
+#board .sudWall:nth-of-type(16) {
+    left: 0;
+}
+#board .sudWall:nth-of-type(17) {
+    left: 20%;
+}
+
+#board .sudWall:nth-of-type(18) {
+    left: 40%;
+}
+
+#board .sudWall:nth-of-type(19) {
+    left: 60%;
+}
+
+#board .sudWall:nth-of-type(20) {
+    left: 80%;
+}
