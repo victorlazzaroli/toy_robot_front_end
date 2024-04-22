@@ -18,7 +18,6 @@ export class Robot {
 
     actionManager = new ActionManager();
 
-    isMoving = false;
     constructor(container, x, y, face) {
         this.container = container;
         this.positionX = x;
@@ -55,9 +54,12 @@ export class Robot {
     }
 
     move(direction) {
+        if (this.constraintHit(direction)) {
+            console.log('contraint hit')
+            return;
+        }
         const step = 100;
         const directionFactor = direction === 'backward' ? 1 : -1;
-
 
         if (this.face === Directions.EAST) {
             this.positionX -= directionFactor * step;
@@ -80,6 +82,8 @@ export class Robot {
         // Set the rotation axis to the robot center
         this.robotElement.style.transformOrigin = `${this.positionX + 50}% ${this.positionY + 50}%`;
         this.robotElement.style.rotate = (`${rotation*90}deg`)
+
+        console.log({x: this.positionX, y: this.positionY, face: this.face})
     }
 
     eventSubscription() {
@@ -87,5 +91,17 @@ export class Robot {
         this.actionManager.register('backward', this.move.bind(this));
         this.actionManager.register('clockwise', this.rotate.bind(this));
         this.actionManager.register('counterclockwise', this.rotate.bind(this));
+    }
+
+    constraintHit(direction) {
+        return this.positionX === 400 && this.face === Directions.EAST && direction === 'forward' ||
+            this.positionX === 0 && this.face === Directions.WEST && direction === 'forward' ||
+            this.positionY === 400 && this.face === Directions.SOUTH && direction === 'forward' ||
+            this.positionY === 0 && this.face === Directions.NORTH && direction === 'forward' ||
+
+            this.positionX === 0 && this.face === Directions.EAST && direction === 'backward' ||
+            this.positionX === 400 && this.face === Directions.WEST && direction === 'backward' ||
+            this.positionY === 0 && this.face === Directions.SOUTH && direction === 'backward' ||
+            this.positionY === 400 && this.face === Directions.NORTH && direction === 'backward' ;
     }
 }
