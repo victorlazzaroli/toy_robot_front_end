@@ -1,8 +1,11 @@
 import {setupBoard} from "./table.js";
 import {Robot} from "./robot.js";
+import {ActionManager} from "./actionManager.js";
 
 const app = document.querySelector('#app');
+const actionManager = new ActionManager();
+actionManager.init();
 const board = setupBoard(app);
-const robot = new Robot( board, 50, 50, 'NORTH');
+const robot = new Robot( board, 0, 0, 'NORTH');
 
 
