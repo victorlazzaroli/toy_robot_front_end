@@ -9,4 +9,3 @@ actionManager.init();
 const board = setupBoard(app);
 const robot = new Robot( board, 0, 0, 'NORTH');
 const controlBench = setupControlBench(app);
-

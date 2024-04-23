@@ -1,5 +1,6 @@
 import '../css/robot.css'
 import {ActionManager, eventTypes} from "./actionManager.js";
+import {ReportModal} from "./report.js";
 
 const Directions = {
     NORTH : 'NORTH',
@@ -55,7 +56,7 @@ export class Robot {
 
     move(direction) {
         if (this.constraintHit(direction)) {
-            console.log('contraint hit')
+            //console.log('contraint hit')
             return;
         }
         const step = 100;
@@ -76,23 +77,26 @@ export class Robot {
     draw() {
         const DirectionsList = [Directions.NORTH, Directions.EAST, Directions.SOUTH, Directions.WEST];
         const rotation = DirectionsList.findIndex(el => el === this.face);
-        // Set the reference system to the top left vertex
+        // Imposta il sistema di riferimento sul vertice in alto a sinistra
         this.robotElement.style.transformOrigin = `0% 0%`;
         this.robotElement.style.transform = `translateX(${this.positionX}%) translateY(${this.positionY}%)`;
-        // Set the rotation axis to the robot center
+        // Imposta l'asse di rotazione al centro del quadrato
         this.robotElement.style.transformOrigin = `${this.positionX + 50}% ${this.positionY + 50}%`;
         this.robotElement.style.rotate = (`${rotation*90}deg`)
 
-        console.log({x: this.positionX, y: this.positionY, face: this.face})
+        //console.log({x: this.positionX, y: this.positionY, face: this.face})
     }
 
+    // Reistrazione delle callback sull'event manager
     eventSubscription() {
         this.actionManager.register(eventTypes.FORWARD, this.move.bind(this));
         this.actionManager.register(eventTypes.BACKWARD, this.move.bind(this));
         this.actionManager.register(eventTypes.CLOCKWISE, this.rotate.bind(this));
         this.actionManager.register(eventTypes.COUNTERCLOCKWISE, this.rotate.bind(this));
+        this.actionManager.register(eventTypes.REPORT, this.report.bind(this));
     }
 
+    // Funzione per il controllo di collisione con i bordi
     constraintHit(direction) {
         return this.positionX === 400 && this.face === Directions.EAST && direction === eventTypes.FORWARD ||
             this.positionX === 0 && this.face === Directions.WEST && direction === eventTypes.FORWARD ||
@@ -103,5 +107,10 @@ export class Robot {
             this.positionX === 400 && this.face === Directions.WEST && direction === eventTypes.BACKWARD ||
             this.positionY === 0 && this.face === Directions.SOUTH && direction === eventTypes.BACKWARD ||
             this.positionY === 400 && this.face === Directions.NORTH && direction === eventTypes.BACKWARD ;
+    }
+
+    report() {
+        const reportModal = new ReportModal();
+        reportModal.open(this.positionX, this.positionY, this.face)
     }
 }
