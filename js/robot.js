@@ -18,6 +18,7 @@ export class Robot {
     robotElement;
 
     actionManager = new ActionManager();
+    freezeRobot = false;
 
     constructor(container, x, y, face) {
         this.container = container;
@@ -42,6 +43,9 @@ export class Robot {
     }
 
     rotate(rotation) {
+        if (this.freezeRobot) {
+            return;
+        }
         const DirectionsList = [Directions.NORTH, Directions.EAST, Directions.SOUTH, Directions.WEST];
         const rotationMultiply = rotation === eventTypes.CLOCKWISE ? 1 : -1;
 
@@ -55,7 +59,7 @@ export class Robot {
     }
 
     move(direction) {
-        if (this.constraintHit(direction)) {
+        if (this.constraintHit(direction) || this.freezeRobot) {
             //console.log('contraint hit')
             return;
         }
@@ -111,6 +115,8 @@ export class Robot {
 
     report() {
         const reportModal = new ReportModal();
-        reportModal.open(this.positionX, this.positionY, this.face)
+        this.freezeRobot = true;
+
+        reportModal.open(this.positionX, this.positionY, this.face, () => {this.freezeRobot = false})
     }
 }

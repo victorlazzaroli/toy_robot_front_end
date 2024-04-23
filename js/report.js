@@ -1,12 +1,15 @@
 import '../css/report.css'
 
 export class ReportModal {
-    static reportComponent;
-    open(positionX, positionY, face) {
-        if (!ReportModal.reportComponent) {
-            ReportModal.reportComponent = document.createElement('div');
-            ReportModal.reportComponent.id = 'reportModal';
-            ReportModal.reportComponent.innerHTML = `
+    reportComponent;
+    closeClbk;
+
+    open(positionX, positionY, face, clbk) {
+        if (!this.reportComponent) {
+            this.closeClbk = clbk;
+            this.reportComponent = document.createElement('div');
+            this.reportComponent.id = 'reportModal';
+            this.reportComponent.innerHTML = `
                 <div >
                     <span style="display: block"><strong>Position X:</strong> ${positionX}</span>
                     <span style="display: block"><strong>Position Y:</strong> ${positionY}</span>
@@ -15,16 +18,20 @@ export class ReportModal {
                     <button type="button" style="align-self: end">Close</button>
                 </div>
             `
-            document.querySelector('body').appendChild(ReportModal.reportComponent);
+            document.querySelector('body').appendChild(this.reportComponent);
 
-            ReportModal.reportComponent.querySelector('button').addEventListener('click', this.close)
+            this.reportComponent.querySelector('button').addEventListener('click', this.close.bind(this))
         }
     }
 
     close() {
-        if (ReportModal.reportComponent) {
-            ReportModal.reportComponent.parentNode.removeChild(ReportModal.reportComponent);
-            ReportModal.reportComponent = null;
+        if (this.reportComponent) {
+            this.reportComponent.parentNode.removeChild(this.reportComponent);
+            this.reportComponent = null;
+        }
+
+        if (this.closeClbk) {
+            this.closeClbk();
         }
     }
 }
