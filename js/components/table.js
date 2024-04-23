@@ -1,5 +1,5 @@
-import '../style.css'
-import '../css/board.css'
+import '../../style.css'
+import '../../css/board.css'
 export function setupBoard(element) {
     const board = document.createElement('div');
     board.id = 'board';

@@ -1,5 +1,5 @@
-import '../css/controlBench.css'
-import {eventTypes} from "./actionManager.js";
+import '../../css/controlBench.css'
+import {eventTypes} from "../services/actionManager.js";
 
 export function setupControlBench(element) {
     const bench = document.createElement('div');

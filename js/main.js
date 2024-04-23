@@ -1,7 +1,7 @@
-import {setupBoard} from "./table.js";
-import {Robot} from "./robot.js";
-import {ActionManager, eventTypes} from "./actionManager.js";
-import {setupControlBench} from "./controlBench.js";
+import {setupBoard} from "./components/table.js";
+import {Robot} from "./components/robot.js";
+import {ActionManager, eventTypes} from "./services/actionManager.js";
+import {setupControlBench} from "./components/controlBench.js";
 
 const app = document.querySelector('#app');
 const actionManager = new ActionManager();

@@ -1,5 +1,5 @@
-import '../css/robot.css'
-import {ActionManager, eventTypes} from "./actionManager.js";
+import '../../css/robot.css'
+import {ActionManager, eventTypes} from "../services/actionManager.js";
 import {ReportModal} from "./report.js";
 
 const Directions = {

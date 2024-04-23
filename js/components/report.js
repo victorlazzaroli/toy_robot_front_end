@@ -1,4 +1,4 @@
-import '../css/report.css'
+import '../../css/report.css'
 
 export class ReportModal {
     reportComponent;
