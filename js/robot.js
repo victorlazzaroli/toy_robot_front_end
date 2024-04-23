@@ -1,5 +1,5 @@
 import '../css/robot.css'
-import {ActionManager} from "./actionManager.js";
+import {ActionManager, eventTypes} from "./actionManager.js";
 
 const Directions = {
     NORTH : 'NORTH',
@@ -42,7 +42,7 @@ export class Robot {
 
     rotate(rotation) {
         const DirectionsList = [Directions.NORTH, Directions.EAST, Directions.SOUTH, Directions.WEST];
-        const rotationMultiply = rotation === 'clockwise' ? 1 : -1;
+        const rotationMultiply = rotation === eventTypes.CLOCKWISE ? 1 : -1;
 
         let newDirectionIndex = (DirectionsList.findIndex(el => el === this.face) + rotationMultiply) % DirectionsList.length;
         if (newDirectionIndex < 0) {
@@ -59,7 +59,7 @@ export class Robot {
             return;
         }
         const step = 100;
-        const directionFactor = direction === 'backward' ? 1 : -1;
+        const directionFactor = direction === eventTypes.BACKWARD ? 1 : -1;
 
         if (this.face === Directions.EAST) {
             this.positionX -= directionFactor * step;
@@ -87,21 +87,21 @@ export class Robot {
     }
 
     eventSubscription() {
-        this.actionManager.register('forward', this.move.bind(this));
-        this.actionManager.register('backward', this.move.bind(this));
-        this.actionManager.register('clockwise', this.rotate.bind(this));
-        this.actionManager.register('counterclockwise', this.rotate.bind(this));
+        this.actionManager.register(eventTypes.FORWARD, this.move.bind(this));
+        this.actionManager.register(eventTypes.BACKWARD, this.move.bind(this));
+        this.actionManager.register(eventTypes.CLOCKWISE, this.rotate.bind(this));
+        this.actionManager.register(eventTypes.COUNTERCLOCKWISE, this.rotate.bind(this));
     }
 
     constraintHit(direction) {
-        return this.positionX === 400 && this.face === Directions.EAST && direction === 'forward' ||
-            this.positionX === 0 && this.face === Directions.WEST && direction === 'forward' ||
-            this.positionY === 400 && this.face === Directions.SOUTH && direction === 'forward' ||
-            this.positionY === 0 && this.face === Directions.NORTH && direction === 'forward' ||
+        return this.positionX === 400 && this.face === Directions.EAST && direction === eventTypes.FORWARD ||
+            this.positionX === 0 && this.face === Directions.WEST && direction === eventTypes.FORWARD ||
+            this.positionY === 400 && this.face === Directions.SOUTH && direction === eventTypes.FORWARD ||
+            this.positionY === 0 && this.face === Directions.NORTH && direction === eventTypes.FORWARD ||
 
-            this.positionX === 0 && this.face === Directions.EAST && direction === 'backward' ||
-            this.positionX === 400 && this.face === Directions.WEST && direction === 'backward' ||
-            this.positionY === 0 && this.face === Directions.SOUTH && direction === 'backward' ||
-            this.positionY === 400 && this.face === Directions.NORTH && direction === 'backward' ;
+            this.positionX === 0 && this.face === Directions.EAST && direction === eventTypes.BACKWARD ||
+            this.positionX === 400 && this.face === Directions.WEST && direction === eventTypes.BACKWARD ||
+            this.positionY === 0 && this.face === Directions.SOUTH && direction === eventTypes.BACKWARD ||
+            this.positionY === 400 && this.face === Directions.NORTH && direction === eventTypes.BACKWARD ;
     }
 }
