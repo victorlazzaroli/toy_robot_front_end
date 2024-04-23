@@ -1,6 +1,7 @@
 import '../../css/robot.css'
 import {ActionManager, eventTypes} from "../services/actionManager.js";
 import {ReportModal} from "./report.js";
+import {PlaceModal} from "./place.js";
 
 const Directions = {
     NORTH : 'NORTH',
@@ -98,6 +99,7 @@ export class Robot {
         this.actionManager.register(eventTypes.CLOCKWISE, this.rotate.bind(this));
         this.actionManager.register(eventTypes.COUNTERCLOCKWISE, this.rotate.bind(this));
         this.actionManager.register(eventTypes.REPORT, this.report.bind(this));
+        this.actionManager.register(eventTypes.PLACE, this.placeModal.bind(this));
     }
 
     // Funzione per il controllo di collisione con i bordi
@@ -118,5 +120,14 @@ export class Robot {
         this.freezeRobot = true;
 
         reportModal.open(this.positionX, this.positionY, this.face, () => {this.freezeRobot = false})
+    }
+    placeModal() {
+        const placeModal = new PlaceModal();
+        this.freezeRobot = true;
+
+        placeModal.open((positionX, positionY, face) => {
+            console.log({positionX, positionY, face})
+            this.freezeRobot = false
+        })
     }
 }
