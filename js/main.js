@@ -7,5 +7,5 @@ const app = document.querySelector('#app');
 const actionManager = new ActionManager();
 actionManager.init();
 const board = setupBoard(app);
-const robot = new Robot( board, 0, 0, 'NORTH');
+const robot = new Robot( board, 0, 400, 'NORTH');
 const controlBench = setupControlBench(app);

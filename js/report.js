@@ -11,8 +11,8 @@ export class ReportModal {
             this.reportComponent.id = 'reportModal';
             this.reportComponent.innerHTML = `
                 <div >
-                    <span style="display: block"><strong>Position X:</strong> ${positionX}</span>
-                    <span style="display: block"><strong>Position Y:</strong> ${positionY}</span>
+                    <span style="display: block"><strong>Position X:</strong> ${positionX / 100 + 1}</span>
+                    <span style="display: block"><strong>Position Y:</strong> ${(400 - positionY) / 100 + 1}</span>
                     <span style="display: block"><strong>Direction:</strong> ${face}</span>
                     
                     <button type="button" style="align-self: end">Close</button>
