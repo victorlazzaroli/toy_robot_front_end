@@ -1,0 +1,20 @@
+#controlBench {
+    display: grid;
+    gap: 10px;
+    width: clamp(250px, 80vw, 60vh);
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 14px;
+}
+
+
+@media only screen and (min-width: 440px) {
+    #controlBench {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    #controlBench {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
