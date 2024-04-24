@@ -75,7 +75,7 @@ export class PlaceModal {
         const positionYInput = form.querySelector('#positionY');
         const errorMessage = form.querySelector('#errorContainer');
 
-        if (form.valid) {
+        if (form.checkValidity()) {
             errorMessage.className = 'validityError';
             return errorMessage.textContent = '';
         }
