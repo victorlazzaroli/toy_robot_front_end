@@ -52,8 +52,8 @@ export class PlaceModal {
         if (!form.checkValidity()) {
             return this.showError()
         }
-        const positionX = this.placeComponent.querySelector('#positionX').value;
-        const positionY = this.placeComponent.querySelector('#positionY').value;
+        const positionX = this.convertToLocalReference(this.placeComponent.querySelector('#positionX').value, false);
+        const positionY = this.convertToLocalReference(this.placeComponent.querySelector('#positionY').value, true);
         const face = this.placeComponent.querySelector('#face').value;
 
         if (this.closeClbk) {
@@ -89,5 +89,13 @@ export class PlaceModal {
             errorMessage.className = 'validityError active';
             return errorMessage.textContent = 'Min position is 1';
         }
+    }
+
+    convertToLocalReference(position, isY) {
+        if (!Number.isInteger(+position)) {
+            return 0;
+        }
+
+        return isY ? 100 * (5 - Number.parseInt(position) ) : 100*(Number.parseInt(position) - 1)
     }
 }

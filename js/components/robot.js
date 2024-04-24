@@ -41,6 +41,7 @@ export class Robot {
         this.positionX = x;
         this.positionY = y;
         this.face = face;
+        this.draw();
     }
 
     rotate(rotation) {
@@ -126,7 +127,7 @@ export class Robot {
         this.freezeRobot = true;
 
         placeModal.open((positionX, positionY, face) => {
-            console.log({positionX, positionY, face})
+            this.place(positionX, positionY, face)
             this.freezeRobot = false
         })
     }
