@@ -9,3 +9,4 @@ actionManager.init();
 const board = setupBoard(app);
 const robot = new Robot( board, 0, 400, 'NORTH');
 const controlBench = setupControlBench(app);
+robot.placeModal()
