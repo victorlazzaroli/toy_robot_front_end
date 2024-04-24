@@ -85,6 +85,9 @@ export class PlaceModal {
         } else if (positionXInput.validity.valueMissing || positionYInput.validity.valueMissing) {
             errorMessage.className = 'validityError active';
             return errorMessage.textContent = 'All fields are required';
+        } else if (positionXInput.validity.rangeUnderflow || positionYInput.validity.rangeUnderflow) {
+            errorMessage.className = 'validityError active';
+            return errorMessage.textContent = 'Min position is 1';
         }
     }
 }
