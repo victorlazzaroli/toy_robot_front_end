@@ -4,11 +4,11 @@ export class PlaceModal {
     closeClbk;
 
     // Metodo per aprire il modal e impostare la callback di chiusura
-    open(clbk) {
+    open(disableClose, clbk) {
         if (!this.placeComponent) {
             this.closeClbk = clbk;
-            this.createModal();
-            this.attachEventListeners();
+            this.createModal(disableClose);
+            this.attachEventListeners(disableClose);
         }
     }
 
@@ -69,7 +69,7 @@ export class PlaceModal {
     }
 
     // Metodo per creare il modal
-    createModal() {
+    createModal(disableClose) {
         this.placeComponent = document.createElement('div');
         this.placeComponent.id = 'placeModal';
         this.placeComponent.innerHTML = `
@@ -94,7 +94,7 @@ export class PlaceModal {
                         </select>
                     </div>
                     <div style="width: 100%; text-align: end">
-                        <button id="closeButton" type="button" style="display: inline" aria-label="Close">Close</button>
+                        ${!disableClose ? '<button id="closeButton" type="button" style="display: inline" aria-label="Close">Close</button>' : ''}
                         <button id="saveButton" type="button" style="margin-left: 1rem; display: inline" aria-label="Save">Save</button>
                     </div>
                 </form>
@@ -104,8 +104,11 @@ export class PlaceModal {
     }
 
     // Metodo per aggiungere gli eventi al modal
-    attachEventListeners() {
-        this.placeComponent.querySelector('#closeButton').addEventListener('click', this.close.bind(this));
+    attachEventListeners(disableClose) {
+        if (!disableClose) {
+
+            this.placeComponent.querySelector('#closeButton').addEventListener('click', this.close.bind(this));
+        }
         this.placeComponent.querySelector('#saveButton').addEventListener('click', this.save.bind(this));
         this.placeComponent.querySelector('form').addEventListener('input', () => {
             this.showError();

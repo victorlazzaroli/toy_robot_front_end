@@ -122,11 +122,11 @@ export class Robot {
 
         reportModal.open(this.positionX, this.positionY, this.face, () => {this.freezeRobot = false})
     }
-    placeModal() {
+    placeModal(disableClose) {
         const placeModal = new PlaceModal();
         this.freezeRobot = true;
 
-        placeModal.open((positionX, positionY, face) => {
+        placeModal.open(disableClose, (positionX, positionY, face) => {
             this.place(positionX, positionY, face)
             this.freezeRobot = false
         })
