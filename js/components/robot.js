@@ -20,6 +20,7 @@ export class Robot {
 
     actionManager = new ActionManager();
     freezeRobot = false;
+    placed = false;
 
     constructor(container, x, y, face) {
         this.container = container;
@@ -41,6 +42,7 @@ export class Robot {
         this.positionX = x;
         this.positionY = y;
         this.face = face;
+        this.placed = true;
         this.draw();
     }
 
@@ -61,7 +63,7 @@ export class Robot {
     }
 
     move(direction) {
-        if (this.constraintHit(direction) || this.freezeRobot) {
+        if (this.constraintHit(direction) || this.freezeRobot || !this.placed) {
             //console.log('contraint hit')
             return;
         }
@@ -100,7 +102,7 @@ export class Robot {
         this.actionManager.register(eventTypes.CLOCKWISE, this.rotate.bind(this));
         this.actionManager.register(eventTypes.COUNTERCLOCKWISE, this.rotate.bind(this));
         this.actionManager.register(eventTypes.REPORT, this.report.bind(this));
-        this.actionManager.register(eventTypes.PLACE, this.placeModal.bind(this));
+        this.actionManager.register(eventTypes.PLACE, this.placeModal.bind(this, false));
     }
 
     // Funzione per il controllo di collisione con i bordi
@@ -127,7 +129,9 @@ export class Robot {
         this.freezeRobot = true;
 
         placeModal.open(disableClose, (positionX, positionY, face) => {
-            this.place(positionX, positionY, face)
+            if (positionX && positionY && face) {
+                this.place(positionX, positionY, face)
+            }
             this.freezeRobot = false
         })
     }

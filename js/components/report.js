@@ -11,6 +11,11 @@ export class ReportModal {
             this.reportComponent.id = 'reportModal';
             this.reportComponent.innerHTML = `
                 <div >
+                    <div id="description">
+                        <h2>
+                            Toy Robot Report
+                        </h2>
+                    </div>
                     <span style="display: block"><strong>Position X:</strong> ${positionX / 100 + 1}</span>
                     <span style="display: block"><strong>Position Y:</strong> ${(400 - positionY) / 100 + 1}</span>
                     <span style="display: block"><strong>Direction:</strong> ${face}</span>

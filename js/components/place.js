@@ -22,17 +22,18 @@ export class PlaceModal {
         const positionY = this.convertToLocalReference(this.placeComponent.querySelector('#positionY').value, true);
         const face = this.placeComponent.querySelector('#face').value;
 
-        if (this.closeClbk) {
-            this.closeClbk(positionX, positionY, face);
-        }
-        this.close();
+        this.close(positionX, positionY, face);
     }
 
     // Metodo per chiudere il modal
-    close() {
+    close(positionX, positionY, face) {
         if (this.placeComponent) {
             this.placeComponent.parentNode.removeChild(this.placeComponent);
             this.placeComponent = null;
+        }
+
+        if (this.closeClbk) {
+            this.closeClbk(positionX, positionY, face);
         }
     }
 
@@ -74,6 +75,11 @@ export class PlaceModal {
         this.placeComponent.id = 'placeModal';
         this.placeComponent.innerHTML = `
             <div>
+                <div id="description">
+                    <h2>
+                        Place the Toy Robot on the Board
+                    </h2>
+                </div>
                 <form>
                     <div id="errorContainer" class="validityError" role="alert" aria-live="assertive"></div>
                     <div>

@@ -14,12 +14,12 @@
 
 }
 
-#reportModal div {
+#reportModal > div {
     display: flex;
     flex-direction: column;
     background-color: white;
-    width: 50%;
-    min-height: 50%;
+    width: 100%;
+    min-height: 100vh;
     padding: 2rem;
     border-radius: 3px;
 }
@@ -32,4 +32,11 @@
     background-color: black;
     color: #e5e5f7;
     letter-spacing: 1px;
+}
+
+@media only screen and (min-width: 640px) {
+    #reportModal > div {
+        width: 50%;
+        min-height: 50%;
+    }
 }
