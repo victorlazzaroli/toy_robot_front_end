@@ -48,7 +48,7 @@ export class Robot {
     }
     // Metodo per la rotazione del robot
     rotate(rotation) {
-        if (this.freezeRobot) {
+        if (this.freezeRobot || !this.placed) {
             return;
         }
         const DirectionsList = [Directions.NORTH, Directions.EAST, Directions.SOUTH, Directions.WEST];
