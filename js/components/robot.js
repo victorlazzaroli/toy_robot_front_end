@@ -10,6 +10,7 @@ const Directions = {
     WEST : 'WEST',
 }
 
+// Classe principale del robot
 export class Robot {
     positionX;
     positionY;
@@ -31,13 +32,13 @@ export class Robot {
         this.draw();
         this.eventSubscription();
     }
-
+    // Inizializzazione dell'elemento HTML rappresentante il robot
     init() {
         this.robotElement = document.createElement('div');
         this.robotElement.id = 'robot';
         this.container.appendChild(this.robotElement);
     }
-
+    // Metodo per il posizionamento del roboto sulla pagina
     place(x, y, face) {
         this.positionX = x;
         this.positionY = y;
@@ -45,7 +46,7 @@ export class Robot {
         this.placed = true;
         this.draw();
     }
-
+    // Metodo per la rotazione del robot
     rotate(rotation) {
         if (this.freezeRobot) {
             return;
@@ -61,7 +62,7 @@ export class Robot {
         this.face = DirectionsList[newDirectionIndex];
         this.draw();
     }
-
+    // Metodo per lo spostamento lungo x e y del robot
     move(direction) {
         if (this.constraintHit(direction) || this.freezeRobot || !this.placed) {
             //console.log('contraint hit')
@@ -81,7 +82,7 @@ export class Robot {
         }
         this.draw();
     }
-
+    // Metodo che disegna l'elemento html del robot nella posizione corretta
     draw() {
         const DirectionsList = [Directions.NORTH, Directions.EAST, Directions.SOUTH, Directions.WEST];
         const rotation = DirectionsList.findIndex(el => el === this.face);
@@ -94,7 +95,7 @@ export class Robot {
 
         //console.log({x: this.positionX, y: this.positionY, face: this.face})
     }
-
+    //
     // Reistrazione delle callback sull'event manager
     eventSubscription() {
         this.actionManager.register(eventTypes.FORWARD, this.move.bind(this));
@@ -117,13 +118,14 @@ export class Robot {
             this.positionY === 0 && this.face === Directions.SOUTH && direction === eventTypes.BACKWARD ||
             this.positionY === 400 && this.face === Directions.NORTH && direction === eventTypes.BACKWARD ;
     }
-
+    // Metodo per aprire e visualizzare il report sulla posizione del robot
     report() {
         const reportModal = new ReportModal();
         this.freezeRobot = true;
 
         reportModal.open(this.positionX, this.positionY, this.face, () => {this.freezeRobot = false})
     }
+    // Metodo per aprire la modale per il posizionamento del robot
     placeModal(disableClose) {
         const placeModal = new PlaceModal();
         this.freezeRobot = true;

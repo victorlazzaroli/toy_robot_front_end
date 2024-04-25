@@ -1,5 +1,6 @@
 import '../../css/report.css'
 
+// Classe che mostra la modale per mostrare la posizione del robot
 export class ReportModal {
     reportComponent;
     closeClbk;

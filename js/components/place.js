@@ -1,4 +1,6 @@
 import '../../css/place.css'
+
+// Classe che mostra la modale per settare la posizione del robot
 export class PlaceModal {
     placeComponent;
     closeClbk;

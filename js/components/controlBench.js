@@ -1,29 +1,29 @@
 import '../../css/controlBench.css'
 import {eventTypes} from "../services/actionManager.js";
 
+// Classe che visualizza il pannello per muovere il robot
 export function setupControlBench(element) {
     const bench = document.createElement('div');
-    const moveDisabled = false;
     bench.id = 'controlBench';
     bench.innerHTML = `
         <button type="button" id=${eventTypes.PLACE} aria-label="Set position">
             [P]lace
         </button>
         
-        <button type="button" id=${eventTypes.FORWARD} aria-label="Move Forward" ${moveDisabled && 'disabled'}>
+        <button type="button" id=${eventTypes.FORWARD} aria-label="Move Forward">
             [F]orward
         </button>
-        <button type="button" id=${eventTypes.BACKWARD} aria-label="Move Backward" ${moveDisabled && 'disabled'}>
+        <button type="button" id=${eventTypes.BACKWARD} aria-label="Move Backward"}>
             [B]ackward
         </button>
-        <button type="button" id=${eventTypes.REPORT} aria-label="Get position" ${moveDisabled && 'disabled'}>
+        <button type="button" id=${eventTypes.REPORT} aria-label="Get position">
             [R]eport
         </button>
         
-        <button type="button" id=${eventTypes.CLOCKWISE} aria-label="Rotate Clockwise" ${moveDisabled && 'disabled'}>
+        <button type="button" id=${eventTypes.CLOCKWISE} aria-label="Rotate Clockwise">
             [C]lockwise
         </button>
-        <button type="button" id=${eventTypes.COUNTERCLOCKWISE} aria-label="Rotate Counterclockwise" ${moveDisabled && 'disabled'}>
+        <button type="button" id=${eventTypes.COUNTERCLOCKWISE} aria-label="Rotate Counterclockwise">
             C[o]unterclockwise
         </button>
     `;
@@ -39,7 +39,7 @@ export function setupControlBench(element) {
     attachEventsToKeyboard();
     return bench;
 }
-
+// Funzione che mappa gli eventi da tastiera su eventi gestiti dal event Manager
 function attachEventsToKeyboard() {
     document.addEventListener('keydown', (event) => {
         let eventType;

@@ -1,11 +1,20 @@
+/**
+ * Classe ActionManager per gestire gli eventi e le relative callback.
+ * Implementa un meccanismo per registrare e instradare gli eventi.
+ */
 export class ActionManager {
+    // Singleton pattern: istanza statica della classe ActionManager
     static actionManager = new this();
+    // Mappa per memorizzare i listener degli eventi
     listeners = new Map();
 
     constructor() {
         return this.constructor.actionManager;
     }
 
+    /**
+     * Metodo per inizializzare ActionManager.
+     */
     init() {
         for (let eventType of Object.values(eventTypes)) {
             this.listeners.set(eventType, []);
@@ -13,7 +22,7 @@ export class ActionManager {
         }
     }
 
-    // Registra dei listener da avvisare qualora un evento occorre
+    // Registra dei listener da avvisare qualora un evento occorra
     register(event, clbk) {
         if ( !this.listeners.has(event) ) {
             throw new Error('Invalid event');
@@ -29,6 +38,9 @@ export class ActionManager {
     }
 }
 
+/**
+ * Oggetto contenente i tipi di eventi supportati.
+ */
 export const eventTypes = {
     PLACE: 'place',
     REPORT: 'report',

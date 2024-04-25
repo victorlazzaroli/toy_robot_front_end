@@ -1,5 +1,7 @@
 import '../../style.css'
 import '../../css/board.css'
+
+// Funzione per la creazione della board su cui si muove il robot
 export function setupBoard(element) {
     const board = document.createElement('div');
     board.id = 'board';
