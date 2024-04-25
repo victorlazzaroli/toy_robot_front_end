@@ -53,6 +53,30 @@ developing your solution.
 Please engineer your solution to a standard you consider suitable for
 production.
 
+How to run
+----------
+In order to run the current project please install Node version 18+. 20+.
+
+Install all dependencies:
+
+    npm install
+
+Run the vite application locally
+
+    npm run dev
+
+Run tests
+
+    npm run test
+
+Run coverage
+
+    npm run coverage
+
+Create the build package
+
+    npm run build
+
 ## Acknowledgements and thanks
 
 The Toy Robot was created by [Jon Eaves](https://twitter.com/joneaves)
